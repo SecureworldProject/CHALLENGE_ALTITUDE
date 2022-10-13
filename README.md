@@ -1,5 +1,6 @@
-# CHALLENGE_ALTITUDE
+# ChallengeMM_GPS
 este challenge cuantiza la altitud obtenida en tramos de 100 metros
+tambien usa la orientacion
 
 
 # DESCRIPCION y FIABILIDAD
@@ -8,8 +9,8 @@ el challenge obtiene la altitud de la primera medida que contiene el geolocation
 el challenge tiene una fiabilidad baja porque el usuario puede saber a que altura esta el emplazamiento "correcto"
 
 # FUNCIONAMIENTO:
-si estas a 666 metros, retorna un "600"
-la clave son 3 digitos en general de modo que hablamos de unas 1000 posibilidades
+si estas a 666 metros, retorna un "6" en altitud ( aprox 10 valores posibles)
+en cuanto la orientacion cuantiza en tramos de 45 grados ( 8 valores posibles)
 
 
 # requisitos:
