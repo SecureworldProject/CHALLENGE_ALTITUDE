@@ -103,12 +103,17 @@ emparejado con tu PC con capacidad GPS?', choices=("Yes","Not"))
     #procesamiento
     # averigua si la altura esta en un rango concreto
     alt=geodata["GPS"][0]["alt"] # primera toma de GPS, componente alt
-    print ("alt es ", alt)
-    cuantized_alt=100*int(alt /100)
+    cuantized_alt=float(alt)
+    cuantized_alt=int(alt/100.0)
     
+    y=geodata["Orientation"][0]["y"]
+    cuantized_orient=int(float(y/45.0)) 
+    
+    print ("alt es ", cuantized_alt)
+    print ("orient es ", cuantized_orient)
 
     #construccion de la respuesta
-    cad="%d"%(cuantized_alt)
+    cad="%d%d"%(cuantized_alt, cuantized_orient)
     key = bytes(cad,'utf-8')
     key_size = len(key)
     result =(key, key_size)
