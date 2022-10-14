@@ -3,7 +3,7 @@ este challenge cuantiza la altitud obtenida en tramos de 100 metros y tambien cu
 
 
 # DESCRIPCION y FIABILIDAD
-ALTITUDE es un challenge que piden al usuario hacer una captura de tipo geolocation para comprobar que se encuentra en un lugar concreto
+GPS es un challenge que piden al usuario hacer una captura de tipo geolocation para comprobar que se encuentra en un lugar concreto
 el challenge obtiene la altitud de la primera medida que contiene el geolocation y la cuantiza en tramos de 100 m
 el challenge tiene una fiabilidad media porque el usuario puede saber a que altura esta el emplazamiento "correcto", pero es muy dificil forzar el resultado GPS del altimetro. Es facil forzar la orientacion colocando el movil en la posicion esperada, pero no la altura
 
