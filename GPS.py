@@ -40,7 +40,7 @@ def executeChallenge():
     
     # mecanismo de lock BEGIN
     # -----------------------
-    lock.lockIN("ALTITUDE")
+    lock.lockIN("GPS")
 
     # pregunta si el usuario tiene movil con capacidad foto
     # -----------------------------------------------------
@@ -50,7 +50,7 @@ emparejado con tu PC con capacidad GPS?', choices=("Yes","Not"))
     print (capable)
 
     if (capable==False):
-        lock.lockOUT("ALTITUDE")
+        lock.lockOUT("GPS")
         print ("return key zero and long zero")
         key=0
         key_size=0
@@ -60,7 +60,7 @@ emparejado con tu PC con capacidad GPS?', choices=("Yes","Not"))
     
     #popup msgbox pidiendo interaccion
     #---------------------------------
-    output = easygui.msgbox(props_dict["interactionText"], "challenge MM: RGB")
+    output = easygui.msgbox(props_dict["interactionText"], "challenge MM: GPS")
 
     
     
@@ -83,7 +83,7 @@ emparejado con tu PC con capacidad GPS?', choices=("Yes","Not"))
         key_size=0
         result =(key,key_size)
         print ("result:",result)
-        lock.lockOUT("RGBplus")
+        lock.lockOUT("GPS")
         return result # clave cero, longitud cero
     
    
@@ -98,7 +98,7 @@ emparejado con tu PC con capacidad GPS?', choices=("Yes","Not"))
     
     #mecanismo de lock END
     #-----------------------
-    lock.lockOUT("ALTITUDE")
+    lock.lockOUT("GPS")
     
     #procesamiento
     # averigua si la altura esta en un rango concreto
