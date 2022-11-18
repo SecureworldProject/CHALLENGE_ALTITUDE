@@ -18,7 +18,7 @@ import json
 # variables globales
 # ------------------
 props_dict={}
-DEBUG_MODE=True
+DEBUG_MODE=False
 
 def init(props):
     global props_dict
@@ -42,27 +42,26 @@ def executeChallenge():
     # -----------------------
     lock.lockIN("GPS")
 
-    # pregunta si el usuario tiene movil con capacidad foto
+    # pregunta si el usuario tiene movil con capacidad GPS
     # -----------------------------------------------------
     #textos en español, aunque podrian ser parametros adicionales del challenge
-    capable=easygui.ynbox(msg='¿Tienes un movil con bluetooth activo y \
+    conexion=easygui.ynbox(msg='¿Tienes un movil con bluetooth activo y \
 emparejado con tu PC con capacidad GPS?', choices=("Yes","Not"))
-    print (capable)
+    print (conexion)
 
-    if (capable==False):
+    #popup msgbox pidiendo interaccion
+    #---------------------------------
+    sent=easygui.ynbox(msg='¿Has enviado la captura de geolocalización desde el móvil a tu PC?', choices=("Yes","Not"))
+    print (sent)
+
+    if (conexion==False | sent== False):
         lock.lockOUT("GPS")
         print ("return key zero and long zero")
         key=0
         key_size=0
         result =(key,key_size)
         print ("result:",result)
-        return result # clave cero, longitud cero
-    
-    #popup msgbox pidiendo interaccion
-    #---------------------------------
-    output = easygui.msgbox(props_dict["interactionText"], "challenge MM: GPS")
-
-    
+        return result # clave cero, longitud cero    
     
     # lectura del fichero capture.geo
     #-------------------------------
@@ -90,7 +89,7 @@ emparejado con tu PC con capacidad GPS?', choices=("Yes","Not"))
 
     
     # una vez consumida, podemos borrar la captura (fichero "capture.geo")
-    if (DEBUG_MODE==False):
+    if (DEBUG_MODE==True):
         if os.path.exists(folder+"/"+filename):    
             os.remove(folder+"/"+filename)
         
@@ -102,11 +101,11 @@ emparejado con tu PC con capacidad GPS?', choices=("Yes","Not"))
     
     #procesamiento
     # averigua si la altura esta en un rango concreto
-    alt=geodata["GPS"][0]["alt"] # primera toma de GPS, componente alt
+    alt=geodata["gps"][0]["alt"] # primera toma de GPS, componente alt
     cuantized_alt=float(alt)
     cuantized_alt=int(alt/100.0)
     
-    y=geodata["Orientation"][0]["y"]
+    y=geodata["orientation"][0]["y"]
     cuantized_orient=int(float(y/45.0)) 
     
     print ("alt es ", cuantized_alt)
@@ -122,7 +121,7 @@ emparejado con tu PC con capacidad GPS?', choices=("Yes","Not"))
 
 
 if __name__ == "__main__":
-    midict={"interactionText": "Por favor haz una captura de datos de geolocalizacion", "param2":3}
+    midict={"interactionText": "", "param2":3}
     init(midict)
     executeChallenge()
 
