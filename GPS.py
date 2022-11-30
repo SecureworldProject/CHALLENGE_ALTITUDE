@@ -49,19 +49,18 @@ def executeChallenge():
 emparejado con tu PC con capacidad GPS?', choices=("Yes","Not"))
     print (conexion)
 
-    #popup msgbox pidiendo interaccion
-    #---------------------------------
-    sent=easygui.ynbox(msg='¿Has enviado la captura de geolocalización desde el móvil a tu PC?', choices=("Yes","Not"))
-    print (sent)
-
-    if (conexion==False | sent== False):
+    if (conexion==False):
         lock.lockOUT("GPS")
         print ("return key zero and long zero")
         key=0
         key_size=0
         result =(key,key_size)
         print ("result:",result)
-        return result # clave cero, longitud cero    
+        return result # clave cero, longitud cero
+
+    #popup msgbox pidiendo interaccion
+    #---------------------------------
+    output = easygui.msgbox(props_dict["interactionText"], "challenge MM: GPS")
     
     # lectura del fichero capture.geo
     #-------------------------------
@@ -83,16 +82,13 @@ emparejado con tu PC con capacidad GPS?', choices=("Yes","Not"))
         result =(key,key_size)
         print ("result:",result)
         lock.lockOUT("GPS")
-        return result # clave cero, longitud cero
-    
+        return result # clave cero, longitud cero  
    
-
     
     # una vez consumida, podemos borrar la captura (fichero "capture.geo")
     if (DEBUG_MODE==True):
         if os.path.exists(folder+"/"+filename):    
-            os.remove(folder+"/"+filename)
-        
+            os.remove(folder+"/"+filename)        
     
     
     #mecanismo de lock END
@@ -121,7 +117,7 @@ emparejado con tu PC con capacidad GPS?', choices=("Yes","Not"))
 
 
 if __name__ == "__main__":
-    midict={"interactionText": "", "param2":3}
+    midict={"interactionText": "Por favor haz una captura de datos de geolocalización.", "param2":3}
     init(midict)
     executeChallenge()
 
