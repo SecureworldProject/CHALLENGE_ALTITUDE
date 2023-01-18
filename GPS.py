@@ -11,7 +11,8 @@ import time
 #para instalar el modulo easygui simplemente:
 #pip3 install easygui
 # o bien py -m pip install easygui
-import easygui
+#import easygui
+from tkinter import messagebox
 import lock
 import json
 
@@ -45,8 +46,9 @@ def executeChallenge():
     # pregunta si el usuario tiene movil con capacidad GPS
     # -----------------------------------------------------
     #textos en español, aunque podrian ser parametros adicionales del challenge
-    conexion=easygui.ynbox(msg='¿Tienes un movil con bluetooth activo y \
-emparejado con tu PC con capacidad GPS?', choices=("Yes","Not"))
+    #conexion=easygui.ynbox(msg='¿Tienes un movil con bluetooth activo y emparejado con tu PC con capacidad GPS?', choices=("Yes","Not"))
+    conexion=messagebox.askyesno('challenge MM: RGB','¿Tienes un movil con bluetooth activo emparejado con tu PC con capacidad GPS?')
+    
     print (conexion)
 
     if (conexion==False):
@@ -60,8 +62,8 @@ emparejado con tu PC con capacidad GPS?', choices=("Yes","Not"))
 
     #popup msgbox pidiendo interaccion
     #---------------------------------
-    output = easygui.msgbox(props_dict["interactionText"], "challenge MM: GPS")
-    
+    #output = easygui.msgbox(props_dict["interactionText"], "challenge MM: GPS")
+    output = messagebox.showinfo("challenge MM: GPS",props_dict["interactionText"])
     # lectura del fichero capture.geo
     #-------------------------------
     # se supone que el usuario ha depositado un .geo usando bluetooth
@@ -97,11 +99,11 @@ emparejado con tu PC con capacidad GPS?', choices=("Yes","Not"))
     
     #procesamiento
     # averigua si la altura esta en un rango concreto
-    alt=geodata["gps"][0]["alt"] # primera toma de GPS, componente alt
+    alt=geodata["GPS"][0]["alt"] # primera toma de GPS, componente alt
     cuantized_alt=float(alt)
     cuantized_alt=int(alt/100.0)
     
-    y=geodata["orientation"][0]["y"]
+    y=geodata["Orientation"][0]["y"]
     cuantized_orient=int(float(y/45.0)) 
     
     print ("alt es ", cuantized_alt)
