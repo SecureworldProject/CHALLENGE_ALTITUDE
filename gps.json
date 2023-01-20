@@ -5,7 +5,7 @@
   "module_python": "GPS",
   "validity_time": 3600,
   "refresh_time": 10,
-  "interactionText": "Por favor haz una captura de datos de geolocation",
+  "interactionText": "Por favor haz una captura de datos de geolocalización",
   },
 "Requirements": "location sensors" 
 }
