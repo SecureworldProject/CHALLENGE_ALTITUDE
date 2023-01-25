@@ -47,8 +47,7 @@ def executeChallenge():
     # -----------------------------------------------------
     #textos en español, aunque podrian ser parametros adicionales del challenge
     #conexion=easygui.ynbox(msg='¿Tienes un movil con bluetooth activo y emparejado con tu PC con capacidad GPS?', choices=("Yes","Not"))
-    conexion=messagebox.askyesno('challenge MM: RGB','¿Tienes un movil con bluetooth activo emparejado a tu PC con capacidad GPS?')
-    
+    conexion=messagebox.askyesno('challenge MM: GPS','¿Tienes un movil con bluetooth activo emparejado a tu PC con capacidad GPS?')
     print (conexion)
 
     if (conexion==False):
@@ -76,7 +75,10 @@ def executeChallenge():
     if os.path.exists(folder+"/"+filename):    
         with open(folder+"/"+filename) as cosa:
             geodata=json.load(cosa)
-            print (geodata)
+            print ("Geolocation data")
+            print ("  Version:",geodata["version"])
+            print ("  GPS:\t",geodata["gps"][0],"\n\t",geodata["gps"][1])
+            print ("  Orientation:\t",geodata["orientation"][0],"\n\t\t",geodata["orientation"][1])
     else:
         print ("ERROR: el fichero de captura",filename," no existe")
         key=0
@@ -88,7 +90,7 @@ def executeChallenge():
    
     
     # una vez consumida, podemos borrar la captura (fichero "capture.geo")
-    if (DEBUG_MODE==True):
+    if (DEBUG_MODE==False):
         if os.path.exists(folder+"/"+filename):    
             os.remove(folder+"/"+filename)        
     
@@ -99,11 +101,11 @@ def executeChallenge():
     
     #procesamiento
     # averigua si la altura esta en un rango concreto
-    alt=geodata["GPS"][0]["alt"] # primera toma de GPS, componente alt
+    alt=geodata["gps"][0]["alt"] # primera toma de GPS, componente alt
     cuantized_alt=float(alt)
     cuantized_alt=int(alt/100.0)
     
-    y=geodata["Orientation"][0]["y"]
+    y=geodata["orientation"][0]["y"]
     cuantized_orient=int(float(y/45.0)) 
     
     print ("alt es ", cuantized_alt)
