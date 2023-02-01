@@ -63,14 +63,14 @@ def executeChallenge():
     #---------------------------------
     #output = easygui.msgbox(props_dict["interactionText"], "challenge MM: GPS")
     output = messagebox.showinfo("challenge MM: GPS",props_dict["interactionText"])
-    # lectura del fichero capture.geo
+    # lectura del fichero capture.gps
     #-------------------------------
-    # se supone que el usuario ha depositado un .geo usando bluetooth
+    # se supone que el usuario ha depositado un .gps usando bluetooth
     # el nombre del fichero puede ser siempre el mismo, fijado por el proxy bluetooth.
     # aqui vamos a "forzar" el nombre del fichero para pruebas
-    filename="capture.geo"
+    filename="capture.gps"
     if (DEBUG_MODE==True):
-        filename="test.geo"
+        filename="test.gps"
 
     if os.path.exists(folder+"/"+filename):    
         with open(folder+"/"+filename) as cosa:
@@ -89,7 +89,7 @@ def executeChallenge():
         return result # clave cero, longitud cero  
    
     
-    # una vez consumida, podemos borrar la captura (fichero "capture.geo")
+    # una vez consumida, podemos borrar la captura (fichero "capture.gps")
     if (DEBUG_MODE==False):
         if os.path.exists(folder+"/"+filename):    
             os.remove(folder+"/"+filename)        
