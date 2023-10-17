@@ -19,7 +19,7 @@ import json
 # variables globales
 # ------------------
 props_dict={}
-DEBUG_MODE=False
+DEBUG_MODE=True
 
 def init(props):
     global props_dict
@@ -61,7 +61,6 @@ def executeChallenge():
 
     #popup msgbox pidiendo interaccion
     #---------------------------------
-    #output = easygui.msgbox(props_dict["interactionText"], "challenge MM: GPS")
     output = messagebox.showinfo("challenge MM: GPS",props_dict["interactionText"])
     # lectura del fichero capture.gps
     #-------------------------------
@@ -100,19 +99,26 @@ def executeChallenge():
     lock.lockOUT("GPS")
     
     #procesamiento
-    # averigua si la altura esta en un rango concreto
-    alt=geodata["gps"][0]["alt"] # primera toma de GPS, componente alt
+    lon=geodata["gps"][0]["lon"] # primera toma de GPS, componente longitud
+    lat=geodata["gps"][0]["lat"] # primera toma de GPS, componente latitud
+    alt=geodata["gps"][0]["alt"] # primera toma de GPS, componente altura
+    cuantized_lon=float(lon)
+    cuantized_lon=int(lon/10.0)
+    cuantized_lat=float(lat)
+    cuantized_lat=int(lat/10.0)
     cuantized_alt=float(alt)
-    cuantized_alt=int(alt/100.0)
+    cuantized_alt=int(alt/10.0)
     
     y=geodata["orientation"][0]["y"]
     cuantized_orient=int(float(y/45.0)) 
-    
+
+    print ("lon es ", cuantized_lon)
+    print ("lat es ", cuantized_lat)
     print ("alt es ", cuantized_alt)
     print ("orient es ", cuantized_orient)
 
     #construccion de la respuesta
-    cad="%d%d"%(cuantized_alt, cuantized_orient)
+    cad="%d%d%d"%(cuantized_lon, cuantized_lat, cuantized_alt)
     key = bytes(cad,'utf-8')
     key_size = len(key)
     result =(key, key_size)
