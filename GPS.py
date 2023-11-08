@@ -103,9 +103,9 @@ def executeChallenge():
     lat=geodata["gps"][0]["lat"] # primera toma de GPS, componente latitud
     alt=geodata["gps"][0]["alt"] # primera toma de GPS, componente altura
     cuantized_lon=float(lon)
-    cuantized_lon=int(lon/10.0)
+    cuantized_lon=int(lon*100)#/10.0)
     cuantized_lat=float(lat)
-    cuantized_lat=int(lat/10.0)
+    cuantized_lat=int(lat*100) #/10.0)
     cuantized_alt=float(alt)
     cuantized_alt=int(alt/10.0)
     
