@@ -19,7 +19,7 @@ el fichero de captura se debe llamar "capture.geo".
 Hay una variable en el challenge  llamada **"DEBUG_MODE"** que la puedes cambiar a True o False. En caso True en lugar del fichero capture.geo se usa test.geo y ademas no se borra el fichero capture.geo despues de procesar. 
 
 ejemplo de configuracion json:
-``` 
+```json 
 {
 "FileName": "challenge_loader_python.dll",
 "Description": "check location",
